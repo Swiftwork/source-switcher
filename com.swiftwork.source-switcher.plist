@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.swiftwork.source-switcher</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/bin/python3</string>
+        <string>-m</string>
+        <string>source_switcher</string>
+        <string>watch</string>
+        <string>--usb</string>
+        <string>CHANGE_ME</string>
+        <string>--on-connect</string>
+        <string>usbc</string>
+        <string>--on-disconnect</string>
+        <string>dp1</string>
+    </array>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PYTHONPATH</key>
+        <string>CHANGE_ME</string>
+        <key>PATH</key>
+        <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+    </dict>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>StandardOutPath</key>
+    <string>/tmp/source-switcher.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/source-switcher.log</string>
+</dict>
+</plist>

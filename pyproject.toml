@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "source-switcher"
+version = "0.1.0"
+description = "Auto-switch LG monitor input source on USB connect/disconnect"
+requires-python = ">=3.10"
+
+[project.scripts]
+source-switcher = "source_switcher.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
