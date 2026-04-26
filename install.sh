@@ -57,8 +57,8 @@ read -p "Source on disconnect [dp1]: " ON_DISCONNECT
 ON_DISCONNECT="${ON_DISCONNECT:-dp1}"
 read -p "Display index, 0-based [1]: " DISPLAY_IDX
 DISPLAY_IDX="${DISPLAY_IDX:-1}"
-read -p "Mirror display on disconnect? [y/N]: " MIRROR_OPT
-MIRROR_OPT="${MIRROR_OPT:-n}"
+read -p "Mirror display on disconnect? [Y/n]: " MIRROR_OPT
+MIRROR_OPT="${MIRROR_OPT:-y}"
 
 # Remove any existing service
 PLIST_DEST="$HOME/Library/LaunchAgents/$PLIST_NAME.plist"
@@ -66,6 +66,14 @@ GUI_DOMAIN="gui/$(id -u)"
 
 echo "Stopping existing service (if any)..."
 launchctl bootout "$GUI_DOMAIN/$PLIST_NAME" 2>/dev/null || true
+
+# bootout returns before launchd has fully cleared the registration; without
+# this wait the next bootstrap can race and fail with "Input/output error".
+for _ in $(seq 1 20); do
+    launchctl print "$GUI_DOMAIN/$PLIST_NAME" >/dev/null 2>&1 || break
+    sleep 0.25
+done
+
 # Belt-and-suspenders: bootout sometimes leaves the process running.
 pkill -f "source_switcher.*watch" 2>/dev/null || true
 rm -f "$PLIST_DEST"
