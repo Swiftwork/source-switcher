@@ -35,10 +35,11 @@ PYTHONPATH=src python3 -m source_switcher watch \
 
 ### Options
 
-| Flag          | Default | Description                  |
-| ------------- | ------- | ---------------------------- |
-| `--display N` | `1`     | Display index, 0-based       |
-| `--interval`  | `2.0`   | USB poll interval in seconds |
+| Flag                       | Default | Description                                                  |
+| -------------------------- | ------- | ------------------------------------------------------------ |
+| `--display N`              | `1`     | Display index, 0-based                                       |
+| `--interval`               | `2.0`   | USB poll interval in seconds                                 |
+| `--mirror-on-disconnect`   | off     | Enable display mirroring on disconnect, disable on connect (macOS) |
 
 ## Run at startup
 
